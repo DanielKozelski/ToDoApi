@@ -9,7 +9,7 @@ function getItems() {
 }
 
 function addItem() {
-    const addNameTextbox = document.getElementById('add name');
+    const addNameTextbox = document.getElementById('add-name');
 
     const item = {
         isComplete: false,
@@ -29,7 +29,7 @@ function addItem() {
             getItems();
             addNameTextbox.value = '';
         })
-        .catch(error => console.error('Unable to add this item.', error));
+        .catch(error => console.error('Unable to add item.', error));
 }
 
 function deleteItem(id) {
@@ -37,24 +37,24 @@ function deleteItem(id) {
         method: 'DELETE'
     })
         .then(() => getItems())
-        .catch(error => console.error('Unable to delete this item.', error));
+        .catch(error => console.error('Unable to delete item.', error));
 }
 
 function displayEditForm(id) {
     const item = todos.find(item => item.id === id);
 
-    document.getElementById('edit name').value = item.name;
-    document.getElementById('edit id').value = item.id;
-    document.getElementById('edit isComplete').checked = item.isComplete;
+    document.getElementById('edit-name').value = item.name;
+    document.getElementById('edit-id').value = item.id;
+    document.getElementById('edit-isComplete').checked = item.isComplete;
     document.getElementById('editForm').style.display = 'block';
 }
 
 function updateItem() {
-    const itemId = document.getElementById('edit id').value;
+    const itemId = document.getElementById('edit-id').value;
     const item = {
         id: parseInt(itemId, 10),
-        isComplete: document.getElementById('edit isComplete').checked,
-        name: document.getElementById('edit name').value.trim()
+        isComplete: document.getElementById('edit-isComplete').checked,
+        name: document.getElementById('edit-name').value.trim()
     };
 
     fetch(`${uri}/${itemId}`, {
@@ -66,7 +66,7 @@ function updateItem() {
         body: JSON.stringify(item)
     })
         .then(() => getItems())
-        .catch(error => console.error('Unable to update this item.', error));
+        .catch(error => console.error('Unable to update item.', error));
 
     closeInput();
 
